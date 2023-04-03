@@ -1,4 +1,5 @@
-import { Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { useState } from "react";
 import Signup from "./pages/signup";
 import Register from "./pages/register";
 import Home from "./pages/home";
@@ -8,37 +9,32 @@ import Trailer from "./pages/trailer";
 import NotFound from "./pages/notFound";
 
 function App() {
+  const [page, setPage] = useState("");
+
+  const handleBackPage = (page: string) => {
+    setPage(page);
+  };
+
   return (
     <>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/register">Register</Link>
-          </li>
-          <li>
-            <Link to="/home">Home</Link>
-          </li>
-          <li>
-            <Link to="/favourite">Favourite</Link>
-          </li>
-          <li>
-            <Link to="/moreInfo">moreInfo</Link>
-          </li>
-          <li>
-            <Link to="/trailer">Trailer</Link>
-          </li>
-        </ul>
-      </nav>
-
-      <Routes>
-        <Route index element={<Signup />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/favourite" element={<Favourite />} />
-        <Route path="/moreInfo" element={<MoreInfo />} />
-        <Route path="/trailer" element={<Trailer />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <Router>
+        <nav>
+          <Link to="/home"> Home </Link>
+          <Link to="/favourite"> Favourite </Link>
+        </nav>
+        <Routes>
+          <Route index element={<Signup />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/home" element={<Home onBack={handleBackPage} />} />
+          <Route
+            path="/favourite"
+            element={<Favourite onBack={handleBackPage} />}
+          />
+          <Route path="/moreInfo" element={<MoreInfo page={page} />} />
+          <Route path="/trailer" element={<Trailer />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Router>
     </>
   );
 }
