@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import Signup from "./pages/signup";
 import Register from "./pages/register";
@@ -12,6 +12,7 @@ import NavBar from "./components/navBar";
 function App() {
   const [page, setPage] = useState("");
   const [toggleNavBar, setToggleNavBar] = useState(false);
+  const [link, setLink] = useState("");
 
   const handleBackPage = (page: string) => {
     setPage(page);
@@ -21,6 +22,11 @@ function App() {
     setToggleNavBar(toggleNavBar);
   };
 
+  const handleTrailer = (link: any) => {
+    setLink(link);
+    console.log(link);
+  };
+
   return (
     <>
       <Router>
@@ -28,13 +34,16 @@ function App() {
         <Routes>
           <Route index element={<Signup onNavBar={handleNavBar} />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/home" element={<Home onBack={handleBackPage} />} />
+          <Route
+            path="/home"
+            element={<Home onTrailer={handleTrailer} onBack={handleBackPage} />}
+          />
           <Route
             path="/favourite"
             element={<Favourite onBack={handleBackPage} />}
           />
           <Route path="/moreInfo" element={<MoreInfo page={page} />} />
-          <Route path="/trailer" element={<Trailer />} />
+          <Route path="/trailer" element={<Trailer link={link} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

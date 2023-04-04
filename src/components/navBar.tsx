@@ -31,7 +31,7 @@ function NavBar({ onNavBar }: Props) {
     });
   };
   return (
-    <Box as="nav" p="5px" bg="gray.700">
+    <Box as="nav" p="5px" bg="gray.700" mb="20px">
       <Flex alignItems="center">
         <HStack spacing="20px">
           <NavLink to="/home"> Home </NavLink>

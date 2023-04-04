@@ -15,6 +15,7 @@ import { InfoIcon, ViewIcon } from "@chakra-ui/icons";
 
 interface Props {
   onBack: (page: string) => void;
+  onTrailer: (link: any) => void;
 }
 
 const GET_MOVIES = gql`
@@ -29,7 +30,7 @@ const GET_MOVIES = gql`
   }
 `;
 
-function Home({ onBack }: Props) {
+function Home({ onBack, onTrailer }: Props) {
   let navigate = useNavigate();
 
   const { error, loading, data } = useQuery(GET_MOVIES);
@@ -52,10 +53,28 @@ function Home({ onBack }: Props) {
               <Divider />
               <CardFooter>
                 <HStack>
-                  <Button size="sm" leftIcon={<InfoIcon />} bg="green.400">
+                  <Button
+                    onClick={() => {
+                      onBack("home");
+                      {
+                        navigate("/moreInfo");
+                      }
+                    }}
+                    size="sm"
+                    leftIcon={<InfoIcon />}
+                    bg="green.400"
+                  >
                     Info
                   </Button>
-                  <Button size="sm" leftIcon={<ViewIcon />} bg="red.700">
+                  <Button
+                    onClick={() => {
+                      navigate("/trailer");
+                      onTrailer(movie.yt_link);
+                    }}
+                    size="sm"
+                    leftIcon={<ViewIcon />}
+                    bg="red.700"
+                  >
                     Watch Trailer
                   </Button>
                 </HStack>
@@ -64,25 +83,6 @@ function Home({ onBack }: Props) {
           );
         })}
       </SimpleGrid>
-
-      <Button
-        onClick={() => {
-          onBack("home");
-          {
-            navigate("/moreInfo");
-          }
-        }}
-      >
-        moreInfo
-      </Button>
-      <Button
-        onClick={() => {
-          navigate("/trailer");
-        }}
-      >
-        {" "}
-        trailer
-      </Button>
     </>
   );
 }

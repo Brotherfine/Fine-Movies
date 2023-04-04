@@ -1,13 +1,21 @@
-import { Button } from "@chakra-ui/react";
+import { Button, AspectRatio, Container } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
-function Trailer() {
+interface Props {
+  link: any;
+}
+
+function Trailer({ link }: Props) {
   let navigate = useNavigate();
 
   return (
     <>
-      <h1>Trailer page</h1>
-      <video></video>
+      <Container p="20px">
+        <AspectRatio ratio={16 / 9}>
+          <iframe title="YouTube video player" src={link} allowFullScreen />
+        </AspectRatio>
+      </Container>
+
       <Button
         onClick={() => {
           navigate("/home");
