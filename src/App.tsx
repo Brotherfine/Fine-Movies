@@ -7,6 +7,7 @@ import Favourite from "./pages/favourite";
 import MoreInfo from "./pages/moreInfo";
 import Trailer from "./pages/trailer";
 import NotFound from "./pages/notFound";
+import NavBar from "./components/navBar";
 
 function App() {
   const [page, setPage] = useState("");
@@ -18,10 +19,7 @@ function App() {
   return (
     <>
       <Router>
-        <nav>
-          <Link to="/home"> Home </Link>
-          <Link to="/favourite"> Favourite </Link>
-        </nav>
+        <NavBar />
         <Routes>
           <Route index element={<Signup />} />
           <Route path="/register" element={<Register />} />

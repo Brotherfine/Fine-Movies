@@ -27,13 +27,6 @@ function Home({ onBack }: Props) {
         {" "}
         trailer
       </button>
-      <button
-        onClick={() => {
-          navigate("/");
-        }}
-      >
-        Sign Out
-      </button>
     </>
   );
 }
