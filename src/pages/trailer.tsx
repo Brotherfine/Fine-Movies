@@ -1,3 +1,4 @@
+import { Button } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 function Trailer() {
@@ -7,13 +8,13 @@ function Trailer() {
     <>
       <h1>Trailer page</h1>
       <video></video>
-      <button
+      <Button
         onClick={() => {
           navigate("/home");
         }}
       >
         back
-      </button>
+      </Button>
     </>
   );
 }

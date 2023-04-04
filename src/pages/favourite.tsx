@@ -1,3 +1,4 @@
+import { Button } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -9,7 +10,7 @@ function Favourite({ onBack }: Props) {
   return (
     <>
       <h1>Favourite</h1>
-      <button
+      <Button
         onClick={() => {
           onBack("favourite");
           {
@@ -18,14 +19,14 @@ function Favourite({ onBack }: Props) {
         }}
       >
         moreInfo
-      </button>
-      <button
+      </Button>
+      <Button
         onClick={() => {
           navigate("/home");
         }}
       >
         Back
-      </button>
+      </Button>
     </>
   );
 }
