@@ -1,3 +1,4 @@
+import { Button } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -9,7 +10,7 @@ function Home({ onBack }: Props) {
   return (
     <>
       <h1>Home</h1>
-      <button
+      <Button
         onClick={() => {
           onBack("home");
           {
@@ -18,15 +19,15 @@ function Home({ onBack }: Props) {
         }}
       >
         moreInfo
-      </button>
-      <button
+      </Button>
+      <Button
         onClick={() => {
           navigate("/trailer");
         }}
       >
         {" "}
         trailer
-      </button>
+      </Button>
     </>
   );
 }

@@ -1,25 +1,31 @@
+import { Button } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
-function Signup() {
+interface Props {
+  onNavBar: (toggleNavBar: boolean) => void;
+}
+
+function Signup({ onNavBar }: Props) {
   let navigate = useNavigate();
   return (
     <>
       <h1>Login</h1>
-      <button
+      <Button
         onClick={() => {
+          onNavBar(true);
           navigate("/home");
         }}
       >
         {" "}
         Sign in{" "}
-      </button>
-      <button
+      </Button>
+      <Button
         onClick={() => {
           navigate("/register");
         }}
       >
         Register
-      </button>
+      </Button>
     </>
   );
 }

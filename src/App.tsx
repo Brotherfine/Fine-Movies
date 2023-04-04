@@ -11,17 +11,22 @@ import NavBar from "./components/navBar";
 
 function App() {
   const [page, setPage] = useState("");
+  const [toggleNavBar, setToggleNavBar] = useState(false);
 
   const handleBackPage = (page: string) => {
     setPage(page);
   };
 
+  const handleNavBar = (toggleNavBar: boolean) => {
+    setToggleNavBar(toggleNavBar);
+  };
+
   return (
     <>
       <Router>
-        <NavBar />
+        {toggleNavBar && <NavBar onNavBar={handleNavBar} />}
         <Routes>
-          <Route index element={<Signup />} />
+          <Route index element={<Signup onNavBar={handleNavBar} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<Home onBack={handleBackPage} />} />
           <Route

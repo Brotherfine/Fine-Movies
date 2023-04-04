@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Flex,
   HStack,
@@ -10,7 +11,11 @@ import {
 import { useNavigate, NavLink } from "react-router-dom";
 import { UnlockIcon } from "@chakra-ui/icons";
 
-function NavBar() {
+interface Props {
+  onNavBar: (toggleNavBar: boolean) => void;
+}
+
+function NavBar({ onNavBar }: Props) {
   let navigate = useNavigate();
   const toast = useToast();
 
@@ -22,31 +27,38 @@ function NavBar() {
       isClosable: true,
       status: "success",
       position: "top",
-      icon: <UnlockIcong />,
+      icon: <UnlockIcon />,
     });
   };
   return (
-    <Flex as="nav" p="5px" alignItems="center">
-      <Heading as="h1" size="md">
-        Fine Movies
-      </Heading>
-      <Spacer />
+    <Box as="nav" p="5px" bg="gray.700">
+      <Flex alignItems="center">
+        <HStack spacing="20px">
+          <NavLink to="/home"> Home </NavLink>
+          <NavLink to="/favourite"> Favourite </NavLink>
+        </HStack>
 
-      <HStack spacing="20px">
-        <NavLink to="/home"> Home </NavLink>
-        <NavLink to="/favourite"> Favourite </NavLink>
+        <Spacer />
+
+        <Heading fontFamily="Magneto" as="h1" size="sm">
+          Fine Movies
+        </Heading>
+
+        <Spacer />
+
         <Button
           bg="teal.400"
           size="xs"
           onClick={() => {
+            onNavBar(false);
             navigate("/");
             showToast;
           }}
         >
           Logout
         </Button>
-      </HStack>
-    </Flex>
+      </Flex>
+    </Box>
   );
 }
 
