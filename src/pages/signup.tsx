@@ -12,7 +12,9 @@ import {
   Link,
   useToast,
 } from "@chakra-ui/react";
+import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
+import { Values } from "zod";
 
 interface Props {
   onNavBar: (toggleNavBar: boolean) => void;
@@ -21,10 +23,19 @@ interface Props {
 function Signup({ onNavBar }: Props) {
   let navigate = useNavigate();
   const toast = useToast();
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    onSubmit: (Values) => {
+      alert(JSON.stringify(Values, null, 2));
+    },
+  });
   return (
     <>
       <Flex
-        as="form"
         align="center"
         justifyContent="center"
         minHeight="100vh"
@@ -39,56 +50,49 @@ function Signup({ onNavBar }: Props) {
           borderRadius={4}
           px={4}
         >
-          <Box mt="10px" mb="5px">
-            <Heading size="md">Sign In to your Account</Heading>
-          </Box>
-          <Box>
-            <FormControl>
-              <FormLabel>Email address</FormLabel>
-              <Input
-                name="email"
-                type="email"
-                placeholder="Enter your Email Address"
-              />
-            </FormControl>
-            <FormControl mt="5px">
-              <FormLabel>Password</FormLabel>
-              <Input
-                name="password"
-                type="password"
-                placeholder="Enter your Password"
-              />
-            </FormControl>
-          </Box>
+          <form onSubmit={formik.handleSubmit}>
+            <Box mt="10px" mb="5px">
+              <Heading size="md">Sign In to your Account</Heading>
+            </Box>
+            <Box>
+              <FormControl>
+                <FormLabel htmlFor="email">Email address</FormLabel>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="Enter your Email Address"
+                  variant="filled"
+                  onChange={formik.handleChange}
+                  value={formik.values.email}
+                />
+              </FormControl>
+              <FormControl mt="5px">
+                <FormLabel htmlFor="password">Password</FormLabel>
+                <Input
+                  id="password"
+                  name="password"
+                  type="password"
+                  placeholder="Enter your Password"
+                  variant="filled"
+                  onChange={formik.handleChange}
+                  value={formik.values.password}
+                />
+              </FormControl>
+            </Box>
 
-          <Box mt="10px" textAlign="right" mr="15px">
-            <Link href="/register" color="teal.100">
-              Signup
-            </Link>
-          </Box>
-          <Box p="10px">
-            <Button
-              type="submit"
-              variant="outline"
-              width="full"
-              onClick={() => {
-                onNavBar(true);
-                navigate("/home");
-                toast({
-                  title: "Signed in",
-                  description: "successfully logged in",
-                  duration: 3000,
-                  isClosable: true,
-                  status: "success",
-                  position: "bottom",
-                  icon: <CheckIcon />,
-                });
-              }}
-            >
-              {" "}
-              Sign in{" "}
-            </Button>
-          </Box>
+            <Box mt="10px" textAlign="right" mr="15px">
+              <Link href="/register" color="teal.100">
+                Signup
+              </Link>
+            </Box>
+            <Box p="10px">
+              <Button type="submit" variant="outline" width="full">
+                {" "}
+                Sign in{" "}
+              </Button>
+            </Box>
+          </form>
         </Box>
       </Flex>
     </>

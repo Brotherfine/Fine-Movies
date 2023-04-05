@@ -4,9 +4,10 @@ import {
   Flex,
   FormControl,
   FormLabel,
-  HStack,
+  VStack,
   Heading,
   Input,
+  HStack,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
@@ -21,95 +22,63 @@ function Register() {
       email: "",
       password: "",
     },
-    onSubmit: (values, actions) => {
+    onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
-      actions.resetForm();
     },
   });
-
   return (
-    <>
-      <Flex
-        align="center"
-        justifyContent="center"
-        minHeight="100vh"
-        width="full"
-      >
-        <Box
-          textAlign="center"
-          maxWidth="450px"
-          width="full"
-          boxShadow="lg"
-          borderWidth={1}
-          borderRadius={4}
-          px={4}
-        >
-          <Box mt="10px" mb="5px">
-            <Heading size="md">Signup</Heading>
-          </Box>
-          <Box>
-            <form>
-              <FormControl>
-                <FormLabel>Name</FormLabel>
-                <Input
-                  name="name"
-                  onChange={formik.handleChange}
-                  value={formik.values.name}
-                  type="text"
-                  placeholder="Enter your Name"
-                />
-              </FormControl>
-              <FormControl mt="5px">
-                <FormLabel>Surname</FormLabel>
-                <Input
-                  name="surname"
-                  onChange={formik.handleChange}
-                  value={formik.values.surname}
-                  type="text"
-                  placeholder="Enter your surname"
-                />
-              </FormControl>
-              <FormControl mt="5px">
-                <FormLabel>Email Address</FormLabel>
-                <Input
-                  name="email"
-                  onChange={formik.handleChange}
-                  value={formik.values.email}
-                  type="email"
-                  placeholder="Enter your email Address"
-                />
-              </FormControl>
-              <FormControl mt="5px">
-                <FormLabel>Password</FormLabel>
-                <Input
-                  name="password"
-                  onChange={formik.handleChange}
-                  value={formik.values.password}
-                  type="password"
-                  placeholder="Create password"
-                />
-              </FormControl>
-            </form>
-          </Box>
-          <HStack
-            mt="10px"
-            mb="5px"
-            p="10px"
-            isInline
-            justifyContent="space-between"
-          >
-            <Box>
-              <Button
-                type="submit"
-                colorScheme="teal"
-                onClick={() => {
-                  navigate("/");
-                }}
-              >
+    <Flex align="center" justify="center" h="100vh">
+      <Box p={6} rounded="md">
+        <form onSubmit={formik.handleSubmit}>
+          <VStack spacing={4} align="flex-start">
+            <FormControl>
+              <FormLabel htmlFor="name">Name</FormLabel>
+              <Input
+                id="name"
+                name="name"
+                type="name"
+                variant="filled"
+                onChange={formik.handleChange}
+                value={formik.values.name}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel htmlFor="surname">Surname</FormLabel>
+              <Input
+                id="surname"
+                name="surname"
+                type="surname"
+                variant="filled"
+                onChange={formik.handleChange}
+                value={formik.values.surname}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel htmlFor="email">Email address</FormLabel>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                variant="filled"
+                onChange={formik.handleChange}
+                value={formik.values.email}
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel htmlFor="password">Password</FormLabel>
+              <Input
+                id="password"
+                name="password"
+                type="password"
+                variant="filled"
+                onChange={formik.handleChange}
+                value={formik.values.password}
+              />
+            </FormControl>
+            <HStack>
+              <Button type="submit" colorScheme="teal" width="full">
                 Register
               </Button>
-            </Box>
-            <Box>
               <Button
                 onClick={() => {
                   navigate("/");
@@ -117,11 +86,11 @@ function Register() {
               >
                 Back
               </Button>
-            </Box>
-          </HStack>
-        </Box>
-      </Flex>
-    </>
+            </HStack>
+          </VStack>
+        </form>
+      </Box>
+    </Flex>
   );
 }
 
