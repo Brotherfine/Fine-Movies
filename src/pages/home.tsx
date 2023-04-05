@@ -5,9 +5,10 @@ import {
   CardFooter,
   CardHeader,
   Divider,
+  Flex,
   HStack,
   SimpleGrid,
-  Text,
+  Spinner,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useQuery, gql } from "@apollo/client";
@@ -36,7 +37,12 @@ function Home({ onBack, onTrailer }: Props) {
   const { error, loading, data } = useQuery(GET_MOVIES);
   console.log(data);
 
-  if (loading) return <div> spinner...</div>;
+  if (loading)
+    return (
+      <Flex mt="250px" justifyContent="center">
+        <Spinner size="md" color="teal.400" />
+      </Flex>
+    );
 
   if (error) return <div>something bad went wrong </div>;
   return (
