@@ -1,5 +1,16 @@
 import { CheckIcon } from "@chakra-ui/icons";
-import { Button, useToast } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  HStack,
+  Heading,
+  Input,
+  Link,
+  useToast,
+} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -11,32 +22,65 @@ function Signup({ onNavBar }: Props) {
   const toast = useToast();
   return (
     <>
-      <h1>Login</h1>
-      <Button
-        onClick={() => {
-          onNavBar(true);
-          navigate("/home");
-          toast({
-            title: "Signed in",
-            description: "successfully logged in",
-            duration: 3000,
-            isClosable: true,
-            status: "success",
-            position: "bottom",
-            icon: <CheckIcon />,
-          });
-        }}
+      <Flex
+        align="center"
+        justifyContent="center"
+        minHeight="100vh"
+        width="full"
       >
-        {" "}
-        Sign in{" "}
-      </Button>
-      <Button
-        onClick={() => {
-          navigate("/register");
-        }}
-      >
-        Register
-      </Button>
+        <Box
+          textAlign="center"
+          maxWidth="450px"
+          width="full"
+          boxShadow="lg"
+          borderWidth={1}
+          borderRadius={4}
+          px={4}
+        >
+          <Box mt="10px" mb="5px">
+            <Heading size="md">Sign In to your Account</Heading>
+          </Box>
+          <Box>
+            <form>
+              <FormControl>
+                <FormLabel>Username</FormLabel>
+                <Input type="username" placeholder="Enter your Username" />
+              </FormControl>
+              <FormControl mt="5px">
+                <FormLabel>Password</FormLabel>
+                <Input type="password" placeholder="Enter your Password" />
+              </FormControl>
+            </form>
+          </Box>
+          <HStack p="10px" isInline justifyContent="space-between">
+            <Box>
+              <Button
+                onClick={() => {
+                  onNavBar(true);
+                  navigate("/home");
+                  toast({
+                    title: "Signed in",
+                    description: "successfully logged in",
+                    duration: 3000,
+                    isClosable: true,
+                    status: "success",
+                    position: "bottom",
+                    icon: <CheckIcon />,
+                  });
+                }}
+              >
+                {" "}
+                Sign in{" "}
+              </Button>
+            </Box>
+            <Box>
+              <Link href="/register" color="teal.300">
+                Signup
+              </Link>
+            </Box>
+          </HStack>
+        </Box>
+      </Flex>
     </>
   );
 }

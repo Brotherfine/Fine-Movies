@@ -4,11 +4,12 @@ import {
   Flex,
   HStack,
   Heading,
+  Link,
   Spacer,
   useToast,
 } from "@chakra-ui/react";
 
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UnlockIcon } from "@chakra-ui/icons";
 
 interface Props {
@@ -23,8 +24,14 @@ function NavBar({ onNavBar }: Props) {
     <Box as="nav" p="5px" bg="gray.700" mb="20px">
       <Flex alignItems="center">
         <HStack spacing="20px">
-          <NavLink to="/home"> Home </NavLink>
-          <NavLink to="/favourite"> Favourite </NavLink>
+          <Link href="/home" color={"orange.300"}>
+            {" "}
+            Home{" "}
+          </Link>
+          <Link href="/favourite" color={"orange.300"}>
+            {" "}
+            Favourite{" "}
+          </Link>
         </HStack>
 
         <Spacer />
