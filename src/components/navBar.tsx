@@ -19,17 +19,6 @@ function NavBar({ onNavBar }: Props) {
   let navigate = useNavigate();
   const toast = useToast();
 
-  const showToast = () => {
-    toast({
-      title: "Logged out",
-      description: "successfully logged out",
-      duration: 3000,
-      isClosable: true,
-      status: "success",
-      position: "top",
-      icon: <UnlockIcon />,
-    });
-  };
   return (
     <Box as="nav" p="5px" bg="gray.700" mb="20px">
       <Flex alignItems="center">
@@ -52,7 +41,15 @@ function NavBar({ onNavBar }: Props) {
           onClick={() => {
             onNavBar(false);
             navigate("/");
-            showToast;
+            toast({
+              title: "Logged out",
+              description: "successfully logged out",
+              duration: 3000,
+              isClosable: true,
+              status: "success",
+              position: "top",
+              icon: <UnlockIcon />,
+            });
           }}
         >
           Logout

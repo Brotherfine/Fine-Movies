@@ -1,4 +1,5 @@
-import { Button } from "@chakra-ui/react";
+import { CheckIcon } from "@chakra-ui/icons";
+import { Button, useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -7,6 +8,7 @@ interface Props {
 
 function Signup({ onNavBar }: Props) {
   let navigate = useNavigate();
+  const toast = useToast();
   return (
     <>
       <h1>Login</h1>
@@ -14,6 +16,15 @@ function Signup({ onNavBar }: Props) {
         onClick={() => {
           onNavBar(true);
           navigate("/home");
+          toast({
+            title: "Signed in",
+            description: "successfully logged in",
+            duration: 3000,
+            isClosable: true,
+            status: "success",
+            position: "bottom",
+            icon: <CheckIcon />,
+          });
         }}
       >
         {" "}
