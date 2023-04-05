@@ -43,8 +43,8 @@ function Signup({ onNavBar }: Props) {
           <Box>
             <form>
               <FormControl>
-                <FormLabel>Username</FormLabel>
-                <Input type="username" placeholder="Enter your Username" />
+                <FormLabel>Email address</FormLabel>
+                <Input type="email" placeholder="Enter your Username" />
               </FormControl>
               <FormControl mt="5px">
                 <FormLabel>Password</FormLabel>
