@@ -17,6 +17,7 @@ import { InfoIcon, ViewIcon } from "@chakra-ui/icons";
 interface Props {
   onBack: (page: string) => void;
   onTrailer: (link: any) => void;
+  onMoreInfo: (title: string, description: string, image: string) => void;
 }
 
 const GET_MOVIES = gql`
@@ -24,14 +25,15 @@ const GET_MOVIES = gql`
     movies {
       id
       title
-      rating
+      description
+      background_link
       yt_link
       display_link
     }
   }
 `;
 
-function Home({ onBack, onTrailer }: Props) {
+function Home({ onBack, onTrailer, onMoreInfo }: Props) {
   let navigate = useNavigate();
 
   const { error, loading, data } = useQuery(GET_MOVIES);
@@ -62,9 +64,12 @@ function Home({ onBack, onTrailer }: Props) {
                   <Button
                     onClick={() => {
                       onBack("home");
-                      {
-                        navigate("/moreInfo");
-                      }
+                      navigate("/moreInfo");
+                      onMoreInfo(
+                        movie.title,
+                        movie.description,
+                        movie.background_link
+                      );
                     }}
                     size="sm"
                     leftIcon={<InfoIcon />}

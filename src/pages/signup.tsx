@@ -4,6 +4,7 @@ import {
   Button,
   Flex,
   FormControl,
+  FormHelperText,
   FormLabel,
   HStack,
   Heading,
@@ -23,6 +24,7 @@ function Signup({ onNavBar }: Props) {
   return (
     <>
       <Flex
+        as="form"
         align="center"
         justifyContent="center"
         minHeight="100vh"
@@ -41,44 +43,52 @@ function Signup({ onNavBar }: Props) {
             <Heading size="md">Sign In to your Account</Heading>
           </Box>
           <Box>
-            <form>
-              <FormControl>
-                <FormLabel>Email address</FormLabel>
-                <Input type="email" placeholder="Enter your Username" />
-              </FormControl>
-              <FormControl mt="5px">
-                <FormLabel>Password</FormLabel>
-                <Input type="password" placeholder="Enter your Password" />
-              </FormControl>
-            </form>
+            <FormControl>
+              <FormLabel>Email address</FormLabel>
+              <Input
+                name="email"
+                type="email"
+                placeholder="Enter your Email Address"
+              />
+            </FormControl>
+            <FormControl mt="5px">
+              <FormLabel>Password</FormLabel>
+              <Input
+                name="password"
+                type="password"
+                placeholder="Enter your Password"
+              />
+            </FormControl>
           </Box>
-          <HStack p="10px" isInline justifyContent="space-between">
-            <Box>
-              <Button
-                onClick={() => {
-                  onNavBar(true);
-                  navigate("/home");
-                  toast({
-                    title: "Signed in",
-                    description: "successfully logged in",
-                    duration: 3000,
-                    isClosable: true,
-                    status: "success",
-                    position: "bottom",
-                    icon: <CheckIcon />,
-                  });
-                }}
-              >
-                {" "}
-                Sign in{" "}
-              </Button>
-            </Box>
-            <Box>
-              <Link href="/register" color="teal.300">
-                Signup
-              </Link>
-            </Box>
-          </HStack>
+
+          <Box mt="10px" textAlign="right" mr="15px">
+            <Link href="/register" color="teal.100">
+              Signup
+            </Link>
+          </Box>
+          <Box p="10px">
+            <Button
+              type="submit"
+              variant="outline"
+              width="full"
+              onClick={() => {
+                onNavBar(true);
+                navigate("/home");
+                toast({
+                  title: "Signed in",
+                  description: "successfully logged in",
+                  duration: 3000,
+                  isClosable: true,
+                  status: "success",
+                  position: "bottom",
+                  icon: <CheckIcon />,
+                });
+              }}
+            >
+              {" "}
+              Sign in{" "}
+            </Button>
+          </Box>
         </Box>
       </Flex>
     </>

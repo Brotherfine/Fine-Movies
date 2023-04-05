@@ -13,6 +13,9 @@ function App() {
   const [page, setPage] = useState("");
   const [toggleNavBar, setToggleNavBar] = useState(false);
   const [link, setLink] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [img, setImg] = useState("");
 
   const handleBackPage = (page: string) => {
     setPage(page);
@@ -27,6 +30,12 @@ function App() {
     console.log(link);
   };
 
+  const handleInfo = (title: string, description: string, img: string) => {
+    setTitle(title);
+    setDescription(description);
+    setImg(img);
+  };
+
   return (
     <>
       <Router>
@@ -36,13 +45,29 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route
             path="/home"
-            element={<Home onTrailer={handleTrailer} onBack={handleBackPage} />}
+            element={
+              <Home
+                onTrailer={handleTrailer}
+                onBack={handleBackPage}
+                onMoreInfo={handleInfo}
+              />
+            }
           />
           <Route
             path="/favourite"
             element={<Favourite onBack={handleBackPage} />}
           />
-          <Route path="/moreInfo" element={<MoreInfo page={page} />} />
+          <Route
+            path="/moreInfo"
+            element={
+              <MoreInfo
+                page={page}
+                title={title}
+                description={description}
+                img={img}
+              />
+            }
+          />
           <Route path="/trailer" element={<Trailer link={link} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
