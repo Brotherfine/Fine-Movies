@@ -14,7 +14,6 @@ import {
 } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
-import { Values } from "zod";
 
 interface Props {
   onNavBar: (toggleNavBar: boolean) => void;
@@ -87,7 +86,24 @@ function Signup({ onNavBar }: Props) {
               </Link>
             </Box>
             <Box p="10px">
-              <Button type="submit" variant="outline" width="full">
+              <Button
+                type="submit"
+                variant="outline"
+                width="full"
+                onClick={() => {
+                  onNavBar(true);
+                  navigate("/home");
+                  toast({
+                    title: "Signed in",
+                    description: "successfully logged in",
+                    duration: 3000,
+                    isClosable: true,
+                    status: "success",
+                    position: "bottom",
+                    icon: <CheckIcon />,
+                  });
+                }}
+              >
                 {" "}
                 Sign in{" "}
               </Button>

@@ -8,11 +8,36 @@ import {
   Heading,
   Input,
   HStack,
+  Spinner,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
+import { gql, useMutation } from "@apollo/client";
+
+const ADD_USER = gql`
+  mutation ADD_DATA(
+    $name: String!
+    $surname: String!
+    $email: String!
+    $password: String!
+  ) {
+    createUser(
+      name: $name
+      surname: $surname
+      email: $email
+      password: $password
+    ) {
+      id
+      name
+      surname
+      email
+      password
+    }
+  }
+`;
 
 function Register() {
+  const [createUser, { error, loading, data }] = useMutation(ADD_USER);
   let navigate = useNavigate();
 
   const formik = useFormik({
@@ -22,8 +47,15 @@ function Register() {
       email: "",
       password: "",
     },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: (e) => {
+      createUser({
+        variables: {
+          name: e.name,
+          surname: e.surname,
+          email: e.email,
+          password: e.password,
+        },
+      });
     },
   });
   return (
